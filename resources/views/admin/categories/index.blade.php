@@ -3,7 +3,7 @@
     <section class="container">
         <h1>Category List</h1>
        <div class="text-end">
-        <a class="btn btn-success" href="{{route('admin.categoriess.create')}}">Crea nuova categoria</a>
+        <a class="btn btn-success" href="{{route('admin.categories.create')}}">Crea nuova categoria</a>
     </div>
 
     @if(session()->has('message'))
@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($categoriess as $category)
+        @foreach($categories as $category)
                 <tr>
                     <th scope="row">{{$category->id}}</th>
                     <td><a href="{{route('admin.categories.show', $category->slug)}}" title="View Category">{{$category->name}}</a></td>
