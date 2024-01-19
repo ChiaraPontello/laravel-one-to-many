@@ -77,13 +77,15 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $formData = $request->validated();
+        $formData['slug'] = $project->slug;
         if ($project->title !== $formData['title']) {
             //creazione slug
             $slug = Project::getSlug($formData['title']);
+             //slug in formData
+            $formData['slug'] = $slug;
         }
 
-        //slug in formData
-        $formData['slug'] = $slug;
+
 
         //aggiungiamo l'id dell'utente proprietario del post
         $formData['user_id'] = $project->user_id;
@@ -95,7 +97,7 @@ class ProjectController extends Controller
             $formData['image'] = $path;
         }
         $project->update($formData);
-        return redirect()->route('admin.projects.show', $project->id);
+        return redirect()->route('admin.projects.show', $project->slug);
     }
 
     /**
